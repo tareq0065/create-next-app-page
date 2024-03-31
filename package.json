@@ -1,0 +1,44 @@
+{
+  "name": "create-next-app-page",
+  "version": "1.0.0",
+  "description": "CLI to scaffold Next.js pages",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build"
+  },
+  "bin": {
+    "create-next-app-page": "./dist/index.js"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/tareq0065/create-next-app-page/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tareq0065/create-next-app-page.git"
+  },
+  "author": {
+    "name": "Tareq Aziz",
+    "email": "tareqaziz0065@gmail.com",
+    "url": "https://github.com/tareq0065"
+  },
+  "maintainers": [
+    {
+      "name": "Tareq Aziz",
+      "email": "tareqaziz0065@gmail.com",
+      "url": "https://github.com/tareq0065"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "prettier": "^3.2.5",
+    "rollup": "^4.13.2"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  }
+}
