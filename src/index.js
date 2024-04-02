@@ -10,7 +10,7 @@ async function getPathAndPageName() {
       name: 'path',
       message: 'Path:',
       validate: function (value) {
-        var pass = value.match(/^[a-zA-Z0-9\/]*$/);
+        const pass = value.match(/^[a-zA-Z0-9\/]*$/);
         if (pass) {
           return true;
         }
@@ -37,7 +37,7 @@ async function getPathAndPageName() {
 
 async function createComponent() {
   const { path: userPath, pageName } = await getPathAndPageName();
-  const basePath = path.join(process.cwd(), userPath, pageName);
+  const basePath = path.join(process.cwd(), 'app', userPath);
   const templatesDir = path.join(__dirname, '..', 'templates');
 
   if (!fs.existsSync(basePath)) {

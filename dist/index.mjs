@@ -1,2 +1,304 @@
 #!/usr/bin/env node
-import e from"fs";import t from"path";import n from"inquirer";var r="undefined"!=typeof global?global:"undefined"!=typeof self?self:"undefined"!=typeof window?window:{};function a(){throw new Error("setTimeout has not been defined")}function o(){throw new Error("clearTimeout has not been defined")}var i=a,u=o;function c(e){if(i===setTimeout)return setTimeout(e,0);if((i===a||!i)&&setTimeout)return i=setTimeout,setTimeout(e,0);try{return i(e,0)}catch(t){try{return i.call(null,e,0)}catch(t){return i.call(this,e,0)}}}"function"==typeof r.setTimeout&&(i=setTimeout),"function"==typeof r.clearTimeout&&(u=clearTimeout);var l,s=[],f=!1,m=-1;function p(){f&&l&&(f=!1,l.length?s=l.concat(s):m=-1,s.length&&h())}function h(){if(!f){var e=c(p);f=!0;for(var t=s.length;t;){for(l=s,s=[];++m<t;)l&&l[m].run();m=-1,t=s.length}l=null,f=!1,function(e){if(u===clearTimeout)return clearTimeout(e);if((u===o||!u)&&clearTimeout)return u=clearTimeout,clearTimeout(e);try{return u(e)}catch(t){try{return u.call(null,e)}catch(t){return u.call(this,e)}}}(e)}}function d(e,t){this.fun=e,this.array=t}d.prototype.run=function(){this.fun.apply(null,this.array)};function g(){}var w=g,y=g,v=g,T=g,b=g,N=g,P=g;var j=r.performance||{},L=j.now||j.mozNow||j.msNow||j.oNow||j.webkitNow||function(){return(new Date).getTime()};var $=new Date;var k={nextTick:function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)t[n-1]=arguments[n];s.push(new d(e,t)),1!==s.length||f||c(h)},title:"browser",browser:!0,env:{},argv:[],version:"",versions:{},on:w,addListener:y,once:v,off:T,removeListener:b,removeAllListeners:N,emit:P,binding:function(e){throw new Error("process.binding is not supported")},cwd:function(){return"/"},chdir:function(e){throw new Error("process.chdir is not supported")},umask:function(){return 0},hrtime:function(e){var t=.001*L.call(j),n=Math.floor(t),r=Math.floor(t%1*1e9);return e&&(n-=e[0],(r-=e[1])<0&&(n--,r+=1e9)),[n,r]},platform:"browser",release:{},config:{},uptime:function(){return(new Date-$)/1e3}},z={};const A=e,E=t,S=n;!async function(){const{path:e,pageName:t}=await async function(){return S.prompt([{type:"input",name:"path",message:"Path:",validate:function(e){return!!e.match(/^[a-zA-Z0-9\/]*$/)||"Please enter a valid path (alphanumeric and slashes only)"}},{type:"input",name:"pageName",message:"Page name:",validate:function(e){return!!/^[A-Z][a-zA-Z0-9]*$/.test(e)||"Please enter a valid page name in CamelCase (e.g., MyPage)"}}])}(),n=E.join(k.cwd(),e,t),r=E.join("/Users/tareqaziz/workspace/npm/create-next-app-page/src","..","templates");A.existsSync(n)||A.mkdirSync(n,{recursive:!0}),A.readdirSync(r).forEach((e=>{let a=A.readFileSync(E.join(r,e),"utf8");"page.js"===e?a=a.replace(/PageName/g,t):"template.js"===e?a=a.replace(/PageNameTemplate/g,`${t}Template`):"layout.js"===e?a=a.replace(/PageNameLayout/g,`${t}Layout`):"loader.js"===e&&(a=a.replace(/PageNameLoader/g,`${t}Loader`)),A.writeFileSync(E.join(n,e),a)})),console.log(`Component '${t}' created successfully at '${e}'`)}();export{z as default};
+import require$$0 from 'fs';
+import require$$1 from 'path';
+import require$$2 from 'inquirer';
+
+var global$1 = (typeof global !== "undefined" ? global :
+            typeof self !== "undefined" ? self :
+            typeof window !== "undefined" ? window : {});
+
+// shim for using process in browser
+// based off https://github.com/defunctzombie/node-process/blob/master/browser.js
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+var cachedSetTimeout = defaultSetTimout;
+var cachedClearTimeout = defaultClearTimeout;
+if (typeof global$1.setTimeout === 'function') {
+    cachedSetTimeout = setTimeout;
+}
+if (typeof global$1.clearTimeout === 'function') {
+    cachedClearTimeout = clearTimeout;
+}
+
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+function nextTick(fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+}
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+var title = 'browser';
+var platform = 'browser';
+var browser = true;
+var env = {};
+var argv = [];
+var version = ''; // empty string to avoid regexp issues
+var versions = {};
+var release = {};
+var config = {};
+
+function noop() {}
+
+var on = noop;
+var addListener = noop;
+var once = noop;
+var off = noop;
+var removeListener = noop;
+var removeAllListeners = noop;
+var emit = noop;
+
+function binding(name) {
+    throw new Error('process.binding is not supported');
+}
+
+function cwd () { return '/' }
+function chdir (dir) {
+    throw new Error('process.chdir is not supported');
+}function umask() { return 0; }
+
+// from https://github.com/kumavis/browser-process-hrtime/blob/master/index.js
+var performance = global$1.performance || {};
+var performanceNow =
+  performance.now        ||
+  performance.mozNow     ||
+  performance.msNow      ||
+  performance.oNow       ||
+  performance.webkitNow  ||
+  function(){ return (new Date()).getTime() };
+
+// generate timestamp or delta
+// see http://nodejs.org/api/process.html#process_process_hrtime
+function hrtime(previousTimestamp){
+  var clocktime = performanceNow.call(performance)*1e-3;
+  var seconds = Math.floor(clocktime);
+  var nanoseconds = Math.floor((clocktime%1)*1e9);
+  if (previousTimestamp) {
+    seconds = seconds - previousTimestamp[0];
+    nanoseconds = nanoseconds - previousTimestamp[1];
+    if (nanoseconds<0) {
+      seconds--;
+      nanoseconds += 1e9;
+    }
+  }
+  return [seconds,nanoseconds]
+}
+
+var startTime = new Date();
+function uptime() {
+  var currentTime = new Date();
+  var dif = currentTime - startTime;
+  return dif / 1000;
+}
+
+var process = {
+  nextTick: nextTick,
+  title: title,
+  browser: browser,
+  env: env,
+  argv: argv,
+  version: version,
+  versions: versions,
+  on: on,
+  addListener: addListener,
+  once: once,
+  off: off,
+  removeListener: removeListener,
+  removeAllListeners: removeAllListeners,
+  emit: emit,
+  binding: binding,
+  cwd: cwd,
+  chdir: chdir,
+  umask: umask,
+  hrtime: hrtime,
+  platform: platform,
+  release: release,
+  config: config,
+  uptime: uptime
+};
+
+var __dirname = '/Users/tareqaziz/workspace/npm/create-next-app-page/src';
+
+var src = {};
+
+const fs = require$$0;
+const path = require$$1;
+const inquirer = require$$2;
+
+// Function to ask for path and page name
+async function getPathAndPageName() {
+  const questions = [
+    {
+      type: 'input',
+      name: 'path',
+      message: 'Path:',
+      validate: function (value) {
+        const pass = value.match(/^[a-zA-Z0-9\/]*$/);
+        if (pass) {
+          return true;
+        }
+
+        return 'Please enter a valid path (alphanumeric and slashes only)';
+      },
+    },
+    {
+      type: 'input',
+      name: 'pageName',
+      message: 'Page name:',
+      validate: function (value) {
+        // Simple CamelCase validation: starts with an uppercase letter followed by lowercase letters/numbers
+        if (/^[A-Z][a-zA-Z0-9]*$/.test(value)) {
+          return true;
+        }
+        return 'Please enter a valid page name in CamelCase (e.g., MyPage)';
+      },
+    },
+  ];
+
+  return inquirer.prompt(questions);
+}
+
+async function createComponent() {
+  const { path: userPath, pageName } = await getPathAndPageName();
+  const basePath = path.join(process.cwd(), 'app', userPath);
+  const templatesDir = path.join(__dirname, '..', 'templates');
+
+  if (!fs.existsSync(basePath)) {
+    fs.mkdirSync(basePath, { recursive: true });
+  }
+
+  fs.readdirSync(templatesDir).forEach((file) => {
+    let content = fs.readFileSync(path.join(templatesDir, file), 'utf8');
+
+    // Dynamically replace the component name based on the file type
+    if (file === 'page.js') {
+      content = content.replace(/PageName/g, pageName);
+    } else if (file === 'template.js') {
+      content = content.replace(/PageNameTemplate/g, `${pageName}Template`);
+    } else if (file === 'layout.js') {
+      content = content.replace(/PageNameLayout/g, `${pageName}Layout`);
+    } else if (file === 'loader.js') {
+      content = content.replace(/PageNameLoader/g, `${pageName}Loader`);
+    }
+
+    fs.writeFileSync(path.join(basePath, file), content);
+  });
+
+  console.log(`Component '${pageName}' created successfully at '${userPath}'`);
+}
+
+createComponent();
+
+export { src as default };

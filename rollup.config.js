@@ -1,7 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
-import { terser } from 'rollup-plugin-terser';
 import builtins from 'rollup-plugin-node-builtins';
 import globals from 'rollup-plugin-node-globals';
 
@@ -21,8 +20,6 @@ export default {
     commonjs(),
     // Enables importing JSON files
     json(),
-    // Optionally minify the output
-    terser(),
     // Polyfills for Node.js globals and modules
     globals(),
     builtins(),

@@ -9,7 +9,7 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "cnap": "./dist/index.js"
+    "cnap": "./dist/index.mjs"
   },
   "keywords": [],
   "bugs": {
@@ -39,11 +39,10 @@
     "prettier": "^3.2.5",
     "rollup": "^4.13.2",
     "rollup-plugin-node-builtins": "^2.1.2",
-    "rollup-plugin-node-globals": "^1.4.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-node-globals": "^1.4.0"
   },
   "dependencies": {
-    "commander": "^12.0.0",
-    "inquirer": "^9.2.17"
+    "inquirer": "^9.2.17",
+    "yargs": "^17.7.2"
   }
 }
