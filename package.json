@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
+    "build:link": "rollup -c && npm link",
     "prepublishOnly": "npm run build"
   },
   "bin": {

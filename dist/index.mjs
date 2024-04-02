@@ -229,7 +229,7 @@ var process = {
   uptime: uptime
 };
 
-var __dirname = '/Users/tareqaziz/workspace/npm/create-next-app-page/src';
+var __dirname = '/Users/brandonwallis/workspace/ex/create-next-app-page/src';
 
 var src = {};
 
@@ -272,7 +272,7 @@ async function getPathAndPageName() {
 
 async function createComponent() {
   const { path: userPath, pageName } = await getPathAndPageName();
-  const basePath = path.join(process.cwd(), 'app', userPath);
+  const basePath = './' + path.join(process.cwd(), 'app', userPath);
   const templatesDir = path.join(__dirname, '..', 'templates');
 
   if (!fs.existsSync(basePath)) {
