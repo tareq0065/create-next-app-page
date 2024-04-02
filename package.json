@@ -1,6 +1,6 @@
 {
   "name": "create-next-app-page",
-  "version": "1.0.0",
+  "version": "0.1.2",
   "description": "CLI to scaffold Next.js pages",
   "main": "dist/index.js",
   "type": "module",
