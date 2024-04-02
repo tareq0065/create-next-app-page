@@ -12,7 +12,7 @@ To install `cnap` globally on your machine via npm, run the
 following command:
 
 ```bash
-npm install -g create-next-app-page
+npm install -g @airoom/create-next-app-page
 ```
 
 This allows you to use the `cnap` command from anywhere on 
@@ -32,10 +32,11 @@ want the new components to be created.
 To create a new component structure:
 
 ```bash
-cnap auth
+cnap
 ```
 
-This will create a directory within `app/auth` 
+This will ask you to enter path name inside app directory 
+and page name to create a directory within `app/auth` 
 with the following structure:
 
 - `loader.js` - Basic loading component.
@@ -78,7 +79,3 @@ We welcome contributions to make `cnap` even better! Here are some ways you can 
 ## Support
 
 If you encounter any issues or have suggestions for improvement, please open an issue on the project's GitHub issue tracker. We appreciate your feedback and contributions!
-
----
-
-This README provides a clear overview of what `cnap` does, how to install and use it, and how others can contribute to the project. Adjust and expand as needed to fit your project's specific requirements and to add any additional details you find relevant.
