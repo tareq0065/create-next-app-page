@@ -1,6 +1,6 @@
 {
   "name": "@airoom/create-next-app-page",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "CLI to scaffold Next.js pages",
   "main": "dist/index.js",
   "type": "module",
@@ -12,6 +12,10 @@
   "bin": {
     "cnap": "./dist/index.mjs"
   },
+  "files": [
+    "dist",
+    "templates/**/*"
+  ],
   "keywords": [
     "nextjs",
     "nextjs-app-router",
