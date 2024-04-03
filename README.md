@@ -35,9 +35,8 @@ To create a new component structure:
 cnap
 ```
 
-This will ask you to enter path name inside app directory 
-and page name to create a directory within `app/auth` 
-with the following structure:
+This will ask you to enter path name and page name to create 
+a directory within `app/pageName` with the following structure:
 
 - `loader.js` - Basic loading component.
 - `template.js` - Basic template component.
