@@ -1,6 +1,36 @@
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
+const { name } = require('../package.json');
+
+function findTemplatesDir() {
+  // Common paths to check
+  const possiblePaths = [
+    path.join(__dirname, 'templates'), // Local development
+    path.join(__dirname, '..', 'templates'), // Global, standard Node.js
+    path.join(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'lib',
+      'node_modules',
+      name,
+      'templates',
+    ), // nvm or n
+    // Add more paths as needed
+  ];
+
+  // Check each path and return the first one that exists
+  for (const possiblePath of possiblePaths) {
+    if (fs.existsSync(possiblePath)) {
+      return possiblePath;
+    }
+  }
+
+  // Fallback or throw an error if the templates directory cannot be found
+  throw new Error('Templates directory not found');
+}
 
 // Function to ask for path and page name
 async function getPathAndPageName() {
@@ -38,7 +68,7 @@ async function getPathAndPageName() {
 async function createComponent() {
   const { path: userPath, pageName } = await getPathAndPageName();
   const basePath = './' + path.join(process.cwd(), 'app', userPath);
-  const templatesDir = path.join(__dirname, '..', 'templates');
+  const templatesDir = findTemplatesDir();
 
   if (!fs.existsSync(basePath)) {
     fs.mkdirSync(basePath, { recursive: true });
