@@ -1,18 +1,36 @@
 {
   "name": "@airoom/create-next-app-page",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "CLI to scaffold Next.js pages",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
-    "build:link": "rollup -c && npm link",
+    "build:link": "rollup -c && npm link --force",
     "prepublishOnly": "npm run build"
   },
   "bin": {
     "cnap": "./dist/index.mjs"
   },
-  "keywords": [],
+  "keywords": [
+    "nextjs",
+    "nextjs-app-router",
+    "cli",
+    "nextjs-cli",
+    "scaffolding",
+    "page-generator",
+    "component-generator",
+    "boilerplate-generator",
+    "react",
+    "developer-tools",
+    "code-generation",
+    "template",
+    "nextjs-template",
+    "project-setup",
+    "build-tools",
+    "automation",
+    "file-generator"
+  ],
   "bugs": {
     "url": "https://github.com/tareq0065/create-next-app-page/issues"
   },
@@ -34,11 +52,15 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/preset-env": "^7.24.3",
+    "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "prettier": "^3.2.5",
     "rollup": "^4.13.2",
+    "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-globals": "^1.4.0"
   },
