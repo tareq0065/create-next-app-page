@@ -1,6 +1,6 @@
 {
   "name": "@airoom/create-next-app-page",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "CLI to scaffold Next.js pages",
   "main": "dist/index.js",
   "type": "module",
