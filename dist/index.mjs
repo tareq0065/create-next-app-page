@@ -271,7 +271,7 @@ async function getPathAndPageName() {
 async function createComponent() {
   const { path: userPath, pageName } = await getPathAndPageName();
   const basePath = './' + path.join(process.cwd(), 'app', userPath);
-  const templatesDir = './templates';
+  const templatesDir = path.dirname('templates');
 
   if (!fs.existsSync(basePath)) {
     fs.mkdirSync(basePath, { recursive: true });
