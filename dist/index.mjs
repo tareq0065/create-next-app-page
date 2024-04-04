@@ -3,8 +3,6 @@ import require$$0 from 'fs';
 import require$$1 from 'path';
 import require$$2 from 'inquirer';
 
-var __dirname = '/Users/tareqaziz/workspace/npm/create-next-app-page/src';
-
 var global$1 = (typeof global !== "undefined" ? global :
             typeof self !== "undefined" ? self :
             typeof window !== "undefined" ? window : {});
@@ -147,7 +145,7 @@ var platform = 'browser';
 var browser = true;
 var env = {};
 var argv = [];
-var version$1 = ''; // empty string to avoid regexp issues
+var version = ''; // empty string to avoid regexp issues
 var versions = {};
 var release = {};
 var config = {};
@@ -211,7 +209,7 @@ var process = {
   browser: browser,
   env: env,
   argv: argv,
-  version: version$1,
+  version: version,
   versions: versions,
   on: on,
   addListener: addListener,
@@ -233,131 +231,9 @@ var process = {
 
 var src = {};
 
-var name$1 = "@airoom/create-next-app-page";
-var version = "0.1.7";
-var description = "CLI to scaffold Next.js pages";
-var main = "dist/index.js";
-var type = "module";
-var scripts = {
-	build: "rollup -c",
-	"build:link": "rollup -c && npm link --force",
-	prepublishOnly: "npm run build"
-};
-var bin = {
-	cnap: "./dist/index.mjs"
-};
-var files = [
-	"dist",
-	"templates/**/*"
-];
-var keywords = [
-	"nextjs",
-	"nextjs-app-router",
-	"cli",
-	"nextjs-cli",
-	"scaffolding",
-	"page-generator",
-	"component-generator",
-	"boilerplate-generator",
-	"react",
-	"developer-tools",
-	"code-generation",
-	"template",
-	"nextjs-template",
-	"project-setup",
-	"build-tools",
-	"automation",
-	"file-generator"
-];
-var bugs = {
-	url: "https://github.com/tareq0065/create-next-app-page/issues"
-};
-var repository = {
-	type: "git",
-	url: "https://github.com/tareq0065/create-next-app-page.git"
-};
-var author = {
-	name: "Tareq Aziz",
-	email: "tareqaziz0065@gmail.com",
-	url: "https://github.com/tareq0065"
-};
-var maintainers = [
-	{
-		name: "Tareq Aziz",
-		email: "tareqaziz0065@gmail.com",
-		url: "https://github.com/tareq0065"
-	}
-];
-var license = "MIT";
-var devDependencies = {
-	"@babel/core": "^7.24.3",
-	"@babel/preset-env": "^7.24.3",
-	"@rollup/plugin-babel": "^6.0.4",
-	"@rollup/plugin-commonjs": "^25.0.7",
-	"@rollup/plugin-json": "^6.1.0",
-	"@rollup/plugin-node-resolve": "^15.2.3",
-	prettier: "^3.2.5",
-	rollup: "^4.13.2",
-	"rollup-plugin-copy": "^3.5.0",
-	"rollup-plugin-node-builtins": "^2.1.2",
-	"rollup-plugin-node-globals": "^1.4.0"
-};
-var dependencies = {
-	inquirer: "^9.2.17",
-	yargs: "^17.7.2"
-};
-var require$$3 = {
-	name: name$1,
-	version: version,
-	description: description,
-	main: main,
-	type: type,
-	scripts: scripts,
-	bin: bin,
-	files: files,
-	keywords: keywords,
-	bugs: bugs,
-	repository: repository,
-	author: author,
-	maintainers: maintainers,
-	license: license,
-	devDependencies: devDependencies,
-	dependencies: dependencies
-};
-
 const fs = require$$0;
 const path = require$$1;
 const inquirer = require$$2;
-const { name } = require$$3;
-
-function findTemplatesDir() {
-  // Common paths to check
-  const possiblePaths = [
-    path.join(__dirname, 'templates'), // Local development
-    path.join(__dirname, '..', 'templates'), // Global, standard Node.js
-    path.join(
-      __dirname,
-      '..',
-      '..',
-      '..',
-      'lib',
-      'node_modules',
-      name,
-      'templates',
-    ), // nvm or n
-    // Add more paths as needed
-  ];
-
-  // Check each path and return the first one that exists
-  for (const possiblePath of possiblePaths) {
-    if (fs.existsSync(possiblePath)) {
-      return possiblePath;
-    }
-  }
-
-  // Fallback or throw an error if the templates directory cannot be found
-  throw new Error('Templates directory not found');
-}
 
 // Function to ask for path and page name
 async function getPathAndPageName() {
@@ -395,7 +271,7 @@ async function getPathAndPageName() {
 async function createComponent() {
   const { path: userPath, pageName } = await getPathAndPageName();
   const basePath = './' + path.join(process.cwd(), 'app', userPath);
-  const templatesDir = findTemplatesDir();
+  const templatesDir = './templates';
 
   if (!fs.existsSync(basePath)) {
     fs.mkdirSync(basePath, { recursive: true });
