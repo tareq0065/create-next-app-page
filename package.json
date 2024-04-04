@@ -1,13 +1,14 @@
 {
   "name": "@airoom/create-next-app-page",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "CLI to scaffold Next.js pages",
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
     "build": "rollup -c",
     "build:link": "rollup -c && npm link --force",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postbuild": "chmod -R 755 dist/templates"
   },
   "bin": {
     "cnap": "./dist/index.mjs"
